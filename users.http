@@ -1,0 +1,19 @@
+POST http://localhost:3001/users/
+Content-Type: application/json
+
+{
+    "username":"indra",
+    "password":"indra@1999"
+
+}
+
+###
+
+POST http://localhost:3001/login/
+Content-Type: application/json
+
+{
+    "username":"indra",
+    "password":"indra@1999"
+
+}
