@@ -63,7 +63,7 @@ const authenticateToken = (request, response, next) => {
 app.post("/users/", async (request, response) => {
   const { username,  password } = request.body;
   const hashedPassword = await bcrypt.hash(request.body.password, 10);
-  const selectUserQuery = `SELECT * FROM user WHERE user_name = '${username}'`;
+  const selectUserQuery = `SELECT * FROM user WHERE user_name='${username}'`;
   const dbUser = await db.get(selectUserQuery);
   if (dbUser === undefined) {
     const createUserQuery = `
@@ -106,21 +106,25 @@ app.post("/login", async (request, response) => {
   }
 });
 
+
+
+
+
 app.post("/transations",authenticateToken,async(request,response)=>{
   // const {username}=request
   const {username,typeoftran,amount}=request.body
   const dateTime=new Date().toISOString();
-  const addtran=`insert into transations(username,typeoftran,amount,date_time) values(
+  const addtran=`insert into transations(user_name,typeoftran,amount,date_time) values(
     '${username}',
     '${typeoftran}',
     '${amount}',
     '${dateTime}'
   );`
-  const res=await db.run(addtran)
+  await db.run(addtran)
   response.send("transation created")
 })
 
- // get type transations
+//  // get type transations
 
  app.get("/transations",authenticateToken,async(request,response)=>{
   const{username}=request
@@ -140,13 +144,12 @@ app.post("/transations",authenticateToken,async(request,response)=>{
 
 
 
-app.get("/transation/:type",authenticateToken,async(request,response)=>{
+app.get("/transations/:type",authenticateToken,async(request,response)=>{
   const{username}=request
   const {type}=request.params
-  const query1=`select '${type}' from transations where user_name='${username}'`
+  const query1=`select * from transations where user_name='${username}'`
   if (query1 !== undefined){
-    const re=`select sum(amount) as total'${type}' from transations 
-    where user_name='${username}' and typeoftran='${type};`
+    const re=`select sum(amount) from transations where user_name='${username}';`
     const result=await db.get(re)
     response.send(result)
   }
@@ -156,7 +159,7 @@ app.get("/transation/:type",authenticateToken,async(request,response)=>{
   }
 })
 
-//delete api endpoint
+// //delete api endpoint
 
 app.delete("/delete/:transId", authenticateToken,async (request, response) => {
   const {username}=request;

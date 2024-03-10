@@ -2,7 +2,7 @@ POST http://localhost:3001/users/
 Content-Type: application/json
 
 {
-    "username":"indra",
+    "username":"indrasena",
     "password":"indra@1999"
 
 }
@@ -16,4 +16,40 @@ Content-Type: application/json
     "username":"indra",
     "password":"indra@1999"
 
+} 
+
+
+
+
+###
+POST http://localhost:3001/transations
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImluZHJhIiwiaWF0IjoxNzEwMDkzMTMxfQ.P4VqIyMzOs36ZBS7PR4uEAyHxgyszNMnMJ9xlhOKxN4
+ 
+
+
+
+{
+    "username":"indra",
+    "typeoftran":"income",
+    "amount":"4094"
 }
+
+
+
+
+
+###
+DELETE http://localhost:3001/delete/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImluZHJhIiwiaWF0IjoxNzEwMDkyMjUwfQ._CrIh56mvKs6DgdT6o8dio6VGlWB6fxoE6fg-AVU5QA
+
+
+
+
+
+
+
+
+####
+GET http://localhost:3001/transations/income
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImluZHJhIiwiaWF0IjoxNzEwMDkyMjUwfQ._CrIh56mvKs6DgdT6o8dio6VGlWB6fxoE6fg-AVU5QA
